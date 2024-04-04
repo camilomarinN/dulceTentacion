@@ -46,7 +46,7 @@ public class Controlador extends HttpServlet {
 			usuarioRepository userRepo = new usuarioRepository();
 			usuario user = userRepo.SearchLogin(email, pass);
 			
-			if(user.getId_usuario() != null && !user.getId_usuario().toString().equals("")) {
+			if(user != null && user.getId_usuario() != null && !user.getId_usuario().toString().equals("")) {
 				request.setAttribute("loginCorrecto", true);
 			}
 			acceso = Index;
