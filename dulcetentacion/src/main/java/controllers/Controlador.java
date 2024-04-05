@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import models.producto;
 import models.usuario;
 import repository.productoRepository;
 import repository.usuarioRepository;
@@ -36,7 +37,7 @@ public class Controlador extends HttpServlet {
 		switch(accion) {
 			case "editProdut":
 				int productid = Integer.parseInt(request.getParameter("productid"));
-				request.setAttribute("productid", productid);
+				request.setAttribute("product", productRepo.findById(productid));
 				acceso = createUpdateProduct;
 				break;
 			default:

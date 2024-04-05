@@ -17,7 +17,7 @@
 	usuario user = request.getAttribute("ActualUser") != null? (usuario)request.getAttribute("ActualUser") : new usuario();
 	if(user != null && user.getId_usuario() != null){
 %>
-<h1>productos</h1>
+<h1 class="font-weight-bold">productos</h1>
 	<div class="container">
 		<table class="table" border="1">
 			<thead>

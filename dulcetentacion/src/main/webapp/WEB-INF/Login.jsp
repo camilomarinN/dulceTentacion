@@ -20,7 +20,7 @@
             <div class="col-12 col-xl-6 align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
               	<form action="Controlador" method="POST">
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicia sesión con nosotros!</h5>
+                  <h5 class="font-weight-bold mb-3 pb-3" style="letter-spacing: 1px;">Inicia sesión con nosotros!</h5>
                   <div class="form-outline mb-4">
                     <input type="email" id="email" name="email" class="form-control form-control-lg" />
                     <label class="form-label" for="email">Correo Electronico</label>
