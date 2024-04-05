@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.usuario;
+import repository.productoRepository;
 import repository.usuarioRepository;
 
 /**
@@ -16,9 +17,13 @@ import repository.usuarioRepository;
 public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	String Login = "WEB-INF/Login.jsp";
-	String Register = "WEB-INF/Registro.jsp";
-	String Index = "index.jsp";
+	private String Login = "WEB-INF/Login.jsp";
+	private String Register = "WEB-INF/Registro.jsp";
+	private String Index = "index.jsp";
+	private usuario user = new usuario();
+	private usuarioRepository userRepo = new usuarioRepository();
+	private productoRepository productRepo = new productoRepository();
+	
     public Controlador() {
         super();
         // TODO Auto-generated constructor stub
@@ -32,7 +37,7 @@ public class Controlador extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String acceso = "";
 		String accion = request.getParameter("accion");
-		
+		user = new usuario();
 		switch (accion) {
 		case "Login":
 			acceso = Login;
@@ -43,13 +48,37 @@ public class Controlador extends HttpServlet {
 		case "SignIn":
 			String email = request.getParameter("email");
 			String pass = request.getParameter("pass");
-			usuarioRepository userRepo = new usuarioRepository();
-			usuario user = userRepo.SearchLogin(email, pass);
+			user = userRepo.SearchLogin(email, pass);
 			
 			if(user != null && user.getId_usuario() != null && !user.getId_usuario().toString().equals("")) {
 				request.setAttribute("loginCorrecto", true);
+				request.setAttribute("ActualUser", user);
+				
+				request.setAttribute("Productos", productRepo.findAll());
+				acceso = Index;
+			}else {
+				request.setAttribute("error", true);
+				acceso = Login;
 			}
-			acceso = Index;
+			break;
+		case "SignUp":
+			String registerDocument = request.getParameter("document");
+			String registerEmail = request.getParameter("email");
+			String registerPass = request.getParameter("pass");
+			String registerName = request.getParameter("name");
+			String registerFirstLastName = request.getParameter("firstLastName");
+			String registerSecondLastName = request.getParameter("secondLastName");
+			user = new usuario(registerDocument,registerName,registerFirstLastName,registerSecondLastName, registerEmail, registerPass, 1);
+			int result = userRepo.save(user);
+			if(result == 1) {
+				request.setAttribute("SingUpUsuario", true);
+				request.setAttribute("ActualUser", userRepo.SearchLogin(registerEmail, registerPass));
+				acceso = Index;
+			}else {
+				request.setAttribute("SingUpUsuario", false);
+				acceso = Register;
+			}
+			
 			break;
 		default:
 			accion = Index;
