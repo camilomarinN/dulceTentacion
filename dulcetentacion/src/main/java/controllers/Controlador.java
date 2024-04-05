@@ -19,6 +19,7 @@ public class Controlador extends HttpServlet {
     
 	private String Login = "WEB-INF/Login.jsp";
 	private String Register = "WEB-INF/Registro.jsp";
+	private String createUpdateProduct = "WEB-INF/CreateUpdateProductModal.jsp";
 	private String Index = "index.jsp";
 	private usuario user = new usuario();
 	private usuarioRepository userRepo = new usuarioRepository();
@@ -30,8 +31,20 @@ public class Controlador extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String acceso = "";
+		String accion = request.getParameter("accion");
+		switch(accion) {
+			case "editProdut":
+				int productid = Integer.parseInt(request.getParameter("productid"));
+				request.setAttribute("productid", productid);
+				acceso = createUpdateProduct;
+				break;
+			default:
+				accion = Index;
+				break;
+		}
+		RequestDispatcher view = request.getRequestDispatcher(acceso);
+		view.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -79,6 +92,11 @@ public class Controlador extends HttpServlet {
 				acceso = Register;
 			}
 			
+			break;
+		case "editProdut":
+			int productid = Integer.parseInt(request.getParameter("productid"));
+			request.setAttribute("productid", productid);
+			acceso = createUpdateProduct;
 			break;
 		default:
 			accion = Index;

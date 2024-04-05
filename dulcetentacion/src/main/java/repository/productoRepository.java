@@ -17,8 +17,25 @@ public class productoRepository implements IRepository<producto>{
 	producto product = new producto();
 	@Override
 	public producto findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		product = new producto();
+		String SQL = "select * from productos where id_producto="+id;
+		onlineBD cn = new onlineBD();
+		try {
+			con = cn.getConexio();
+			pst = con.prepareStatement(SQL);
+			rst = pst.executeQuery();
+			while (rst.next()) {
+				product.setId_producto(rst.getInt(1));
+				product.setNombre_producto(rst.getString(2));
+				product.setDescripcion_producto(rst.getString(3));
+				product.setPrecio_producto(rst.getBigDecimal(4));
+				product.setTipo_producto(rst.getInt(5));
+			}
+		} catch (Exception e) {
+			System.out.println("Error consulta de productos por ID: " + e);
+		}
+		return product;
+
 	}
 
 	@Override

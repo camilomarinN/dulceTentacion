@@ -49,8 +49,8 @@
 					<td><%=product.getTipo_producto() %></td>
 					<% if(user.getRol_usuario() == 0){ %>
 					<td>
-						<a>edit</a>
-						<a>remove</a>
+						<a class="btn btn-primary" href="Controlador?accion=editProdut&productid=<%=product.getId_producto()%>">edit</a>
+						<a class="btn btn-primary" href="">remove</a>
 					</td>
 					<%} %>
 				</tr>
