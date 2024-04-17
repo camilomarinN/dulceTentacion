@@ -57,7 +57,7 @@
 					</div>
 	                 </div>
 	                 <p class="mb-5 pb-lg-2">ya posees una cuenta? 
-	                 	<button  class="rounded" type="submit" name="accion" value="Login" style="text-decoration: none; border: none; background-color: none;">Inicia sesión Aqui!</button>
+	                 	<a  class="rounded" href="Controlador?accion=Login" style="text-decoration: none; border: none; background-color: none;">Inicia sesión Aqui!</a>
 	                  </p>
 	                   </form>
 	              </div>
