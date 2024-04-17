@@ -32,7 +32,7 @@ public class productoRepository implements IRepository<producto>{
 				product.setTipo_producto(rst.getInt(5));
 			}
 		} catch (Exception e) {
-			System.out.println("Error consulta de productos por ID: " + e);
+			System.out.println("Error consulta PRODUCTS POR ID: " + e);
 		}
 		return product;
 
@@ -57,27 +57,59 @@ public class productoRepository implements IRepository<producto>{
 				Lista.add(product);
 			}
 		} catch (Exception e) {
-			System.out.println("Error consulta lista de productos: " + e);
+			System.out.println("Error consulta LIST PRODUCTS: " + e);
 		}
 		return Lista;
 	}
 
 	@Override
-	public Integer save(producto entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer save(producto product) {
+		int result = 0;
+		String SQL = "INSERT INTO PRODUCTOS VALUES('"+product.getNombre_producto()+"','"+product.getDescripcion_producto()+"','"
+					  +product.getPrecio_producto()+"','"+product.getTipo_producto();
+		
+		onlineBD cn = new onlineBD();
+		try {
+			con = cn.getConexio();
+			pst = con.prepareStatement(SQL);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error consulta del SAVE PRODUCTO: " + e);
+		}
+		return result;
 	}
 
 	@Override
 	public Integer update(producto entity) {
-		// TODO Auto-generated method stub
-		return null;
+		int result = 0;
+		String SQL = "UPDATE PRODUCTOS SET nombre_producto='"+product.getNombre_producto()+"',descripcion_producto='"+product.getDescripcion_producto()+"',"
+				+ "precio_producto="+product.getPrecio_producto()+", tipo_producto="+product.getTipo_producto();
+		
+		onlineBD cn = new onlineBD();
+		try {
+			con = cn.getConexio();
+			pst = con.prepareStatement(SQL);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error consulta del UPDATE PRODUCTO: " + e);
+		}
+		return result;
 	}
 
 	@Override
 	public Integer delete(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		int result = 0;
+		String SQL = "DELETE FROM PRODUCTOS where id_producto="+id;
+		
+		onlineBD cn = new onlineBD();
+		try {
+			con = cn.getConexio();
+			pst = con.prepareStatement(SQL);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error consulta del DELETE PRODUCTO: " + e);
+		}
+		return result;
 	}
 
 }

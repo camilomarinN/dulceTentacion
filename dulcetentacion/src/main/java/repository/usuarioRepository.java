@@ -72,8 +72,19 @@ public class usuarioRepository implements IRepository<usuario> {
 
 	@Override
 	public Integer update(usuario usuario) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		String SQL = "UPDATE USUARIOS SET nombre_usuario='"+usuario.getNombre_usuario()+"', primer_apellido_usuario='"+usuario.getPrimer_apellido_usuario()+"',"
+				+ "segundo_apellido_usuario="+usuario.getSegundo_apellido_usuario()+", email_usuario="+usuario.getEmail_usuario();
+		
+		onlineBD cn = new onlineBD();
+		try {
+			con = cn.getConexio();
+			pst = con.prepareStatement(SQL);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error consulta del UPDATE PRODUCTO: " + e);
+		}
+		return result;
 	}
 
 	@Override
