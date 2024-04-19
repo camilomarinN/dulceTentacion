@@ -21,7 +21,7 @@ session.removeAttribute("Login");
 		<% }else{ %>
 		<div>
 			<a class="navbar-brand mx-2" href="Controlador?accion=myProfile">Perfil</a>
-			<% if(user.getRol_usuario() == 0){%>
+			<% if(user.getRol_usuario() == 1){%>
 			<a class="navbar-brand mx-2" href="Controlador?accion=UsersList">Administración de usuarios</a>
 			<a class="navbar-brand mx-2" href="Controlador?accion=ProductsList">Administración de productos</a>
 			<% } %>
