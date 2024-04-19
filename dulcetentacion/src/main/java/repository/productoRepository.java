@@ -65,8 +65,8 @@ public class productoRepository implements IRepository<producto>{
 	@Override
 	public Integer save(producto product) {
 		int result = 0;
-		String SQL = "INSERT INTO PRODUCTOS VALUES('"+product.getNombre_producto()+"','"+product.getDescripcion_producto()+"','"
-					  +product.getPrecio_producto()+"','"+product.getTipo_producto();
+		String SQL = "INSERT INTO PRODUCTOS(nombre_producto, descripcion_producto, precio_producto, tipo_producto) VALUES('"+product.getNombre_producto()+"','"+product.getDescripcion_producto()+"','"
+					  +product.getPrecio_producto()+"',"+product.getTipo_producto()+")";
 		
 		onlineBD cn = new onlineBD();
 		try {
@@ -80,10 +80,10 @@ public class productoRepository implements IRepository<producto>{
 	}
 
 	@Override
-	public Integer update(producto entity) {
+	public Integer update(producto product) {
 		int result = 0;
 		String SQL = "UPDATE PRODUCTOS SET nombre_producto='"+product.getNombre_producto()+"',descripcion_producto='"+product.getDescripcion_producto()+"',"
-				+ "precio_producto="+product.getPrecio_producto()+", tipo_producto="+product.getTipo_producto();
+				+ "precio_producto="+product.getPrecio_producto()+", tipo_producto="+product.getTipo_producto()+" where id_producto="+product.getId_producto();
 		
 		onlineBD cn = new onlineBD();
 		try {

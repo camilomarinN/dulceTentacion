@@ -10,17 +10,20 @@
 <body>
 <% 
 session = request.getSession(false);
-usuario user = session != null && session.getAttribute("ActualUser") != null? (usuario)session.getAttribute("ActualUser") : null; %>
+usuario user = session != null && session.getAttribute("ActualUser") != null? (usuario)session.getAttribute("ActualUser") : null; 
+Boolean login =session != null && session.getAttribute("Login") != null? (Boolean)session.getAttribute("Login") : false; 
+session.removeAttribute("Login");
+%>
 <header>
-	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-1">
+	<nav class="navbar navbar-expand-md navbar-light fixed-top p-1 fw-bold" style="background-color: #F0DEDE !important;">
 		<% if(user == null || user.getId_usuario() == null){%>
 		<a class="navbar-brand mx-2" href="Controlador?accion=Login">Iniciar sesión</a>
 		<% }else{ %>
 		<div>
-			<a class="navbar-brand btn btn-sm btn-dark " href="Controlador?accion=myProfile">Perfil</a>
+			<a class="navbar-brand mx-2" href="Controlador?accion=myProfile">Perfil</a>
 			<% if(user.getRol_usuario() == 0){%>
-			<a class="navbar-brand btn btn-sm btn-dark " href="Controlador?accion=UsersList">Administración de usuarios</a>
-			<a class="navbar-brand btn btn-sm btn-dark " href="Controlador?accion=ProductsList">Administración de productos</a>
+			<a class="navbar-brand mx-2" href="Controlador?accion=UsersList">Administración de usuarios</a>
+			<a class="navbar-brand mx-2" href="Controlador?accion=ProductsList">Administración de productos</a>
 			<% } %>
 		</div>
 		<div class="ms-auto">
@@ -84,13 +87,14 @@ usuario user = session != null && session.getAttribute("ActualUser") != null? (u
         </div>
     </main>
     <!-- FOOTER -->
-   	<footer class="py-3 my-4 bg-dark">
+   	<footer class="py-3 my-4 bg-light fw-bold" style="background-color: #F0DEDE !important;">
 	   	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-	     	<li class="nav-item"><a href="#" class="nav-link px-2 text-white">Preguntas frecuentes</a></li>
-	     	<li class="nav-item"><a href="#" class="nav-link px-2 text-white">Sobre nuestros productos</a></li>
-	    	<li class="nav-item"><a href="#" class="nav-link px-2 text-white">Acerca de nosotros</a></li>
+	     	<li class="nav-item"><a href="#" class="nav-link px-2 text-dark">Preguntas frecuentes</a></li>
+	     	<li class="nav-item"><a href="#" class="nav-link px-2 text-dark">Sobre nuestros productos</a></li>
+	    	<li class="nav-item"><a href="#" class="nav-link px-2 text-dark">Acerca de nosotros</a></li>
 	   	</ul>
- 		<p class="text-center text-white">© 2024 DulceTentacion, Software Productions</p>
+	   	<hr class="featurette-divider">
+ 		<p class="text-center text-dark">© 2024 DulceTentacion, Software Productions</p>
 	</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -98,8 +102,7 @@ usuario user = session != null && session.getAttribute("ActualUser") != null? (u
 	<script  src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
-	var logeado = <%=request.getAttribute("loginCorrecto")%>
-	if(logeado){
+	<% if(login) {%>
 		const Toast = Swal.mixin({
 			  toast: true,
 			  position: "top-end",
@@ -115,7 +118,7 @@ usuario user = session != null && session.getAttribute("ActualUser") != null? (u
 			  icon: "success",
 			  title: "bienvenido <%=user.getNombre_usuario() %> <%=user.getPrimer_apellido_usuario() %> <%=user.getSegundo_apellido_usuario() %>"
 			});
-	}
+<%}%>
 	</script>
 </body>
 </html>
