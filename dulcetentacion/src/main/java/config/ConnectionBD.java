@@ -31,7 +31,6 @@ public class ConnectionBD {
     }
     //Metodo de conexión 
     public Connection getConexio(){
-        System.out.println("CONEXION CORRECTA");
         return con; 
     }
 	public static void main(String[] args) {

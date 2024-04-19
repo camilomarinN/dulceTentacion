@@ -23,7 +23,6 @@ public class onlineBD {
   }
 	//Metodo de conexión 
 	public Connection getConexio(){
-		System.out.println("conexion correcta");
 		return con;
 	}
  

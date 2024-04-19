@@ -8,13 +8,13 @@
 	rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-	<section class="vh-100" style="background-color: #9A616D;">
+	<section class="vh-100" style="background-color: #F0DEDE;">
 	 <div class="container py-5 h-100">
 	   <div class="row d-flex justify-content-center align-items-center h-100">
 	     <div class="col-10">
 	       <div class="card" style="border-radius: 1rem;">
 	         <div class="row g-0 d-flex">
-	           <div class="col-xl-6 d-none d-xl-block" style="background-color: #ece4e2;">
+	           <div class="col-xl-6 d-none d-xl-block" style="background-color: #F0DEDE;">
 	             <img src="img/logo.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
 	           </div>
 	           <div class="col-12 col-xl-6 align-items-center">
