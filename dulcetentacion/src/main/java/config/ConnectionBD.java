@@ -18,10 +18,10 @@ public class ConnectionBD {
     private String classname = "oracle.jdbc.driver.OracleDriver"; 
     //direccionamiento de la bd
     private String url = "jdbc:oracle:thin:" + host + ":" + port + ":XE";   
-                         //jdbc:oracle:thin:@localhost:1521:XE
+                    
    private Connection con; 
-    // Constructor 
-    public ConnectionBD(){
+
+   public ConnectionBD(){
         try {
             Class.forName(classname); 
             con = DriverManager.getConnection(url, username, password); 
@@ -29,12 +29,8 @@ public class ConnectionBD {
             System.out.println("Error" + e);
         }
     }
-    //Metodo de conexión 
-    public Connection getConexio(){
+
+   public Connection getConexio(){
         return con; 
     }
-	public static void main(String[] args) {
-		ConnectionBD con = new ConnectionBD();   
-			con.getConexio();
-	}
 }

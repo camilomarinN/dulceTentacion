@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import config.onlineBD;
+import config.ConnectionBD;
 import models.tipoProducto;
 
 public class tipoProductoRepository implements IRepository<tipoProducto>{
@@ -24,8 +24,8 @@ public class tipoProductoRepository implements IRepository<tipoProducto>{
 	@Override
 	public List<tipoProducto> findAll() {
 		List<tipoProducto> Lista = new ArrayList<tipoProducto>();
-		String SQL = "select * from tipo_producto";
-		onlineBD cn = new onlineBD();
+		String SQL = "select * from tipos_productos";
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);

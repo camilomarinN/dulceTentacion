@@ -13,8 +13,9 @@ import models.producto;
 import models.usuario;
 import repository.productoRepository;
 import repository.tipoProductoRepository;
-import repository.usuarioRepository;
+import service.mensajeService;
 import service.productoService;
+import service.usuarioService;
 
 public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,15 +26,17 @@ public class Controlador extends HttpServlet {
 	private String Register = "WEB-INF/Registro.jsp";
 	private String productList = "WEB-INF/ProductList.jsp";
 	private String createUpdateProduct = "WEB-INF/CreateUpdateProductModal.jsp";
+	private String resetPassword = "WEB-INF/resetPassword.jsp";
 	
 	//Modelos y objetos
 	private int ResultQuerys;
 	private usuario user;
 	private producto product;
 	HttpSession session = null;
-	private usuarioRepository userRepo = new usuarioRepository();
-	private productoRepository productRepo = new productoRepository();
+	private usuarioService userService = new usuarioService();
+	private mensajeService  mensajeService;
 	private productoService productService = new productoService();
+	private productoRepository productRepo = new productoRepository();
 	private tipoProductoRepository tipoProductRepo = new tipoProductoRepository();
 
     public Controlador() {
@@ -80,6 +83,9 @@ public class Controlador extends HttpServlet {
 				session = request.getSession(false);
 				if(session != null && session.getAttribute("ActualUser") != null) {session.invalidate();}
 				break;
+			case "resetPassword":
+				acceso = resetPassword;
+				break;
 			default:
 				accion = Index;
 				break;
@@ -95,7 +101,7 @@ public class Controlador extends HttpServlet {
 		user = new usuario();
 		switch (accion) {
 		case "SignIn":
-			user = userRepo.SearchLogin(request.getParameter("email"), request.getParameter("pass"));
+			user = userService.LoginUser(request.getParameter("email"), request.getParameter("pass"));
 			if(user != null && user.getId_usuario() != null && !user.getId_usuario().toString().equals("")) {
 				session = request.getSession();
 				session.setAttribute("Login", true);
@@ -103,28 +109,38 @@ public class Controlador extends HttpServlet {
 				acceso = Index;
 			}else {
 				session = request.getSession(false);
-				session.invalidate();
+				if(session != null) {
+					session.invalidate();
+				}
 				acceso = Login;
 			}
 			break;
 		case "SignUp":
+			session = request.getSession();
 			user = new usuario(request.getParameter("document"),request.getParameter("name"),request.getParameter("firstLastName"), request.getParameter("secondLastName"), request.getParameter("email"), request.getParameter("pass"), 1);
-			ResultQuerys = userRepo.save(user);
+			ResultQuerys = userService.saveUserData(user, "add");
 			if(ResultQuerys == 1) {
 				session.setAttribute("Login", true);
-				session.setAttribute("ActualUser", userRepo.SearchLogin(request.getParameter("email"), request.getParameter("pass")));
+				session.setAttribute("ActualUser", userService.LoginUser(request.getParameter("email"), request.getParameter("pass")));
 				acceso = Index;
 			}else {
-				session.invalidate();
+				if(session != null) {
+					session.invalidate();
+				}
 				acceso = Register;
 			}
 			break;
+		case "recoverPass":
+			mensajeService = new mensajeService();
+			mensajeService.SendMessage(request.getParameter("recoverEmail").toString(), "recuperación de contraseña - Dulce Tentación", mensajeService.RESET_PASSWORD_TEMPLATE);
+			response.sendRedirect(request.getContextPath() + "/Controlador?accion=Login");
+			return;
 		case "saveProduct":
 			int actualProductId = request.getParameter("idProducto") != null && request.getParameter("idProducto") != "" ? Integer.parseInt(request.getParameter("idProducto")) : 0;
 			BigDecimal numeroBigDecimal = new BigDecimal(request.getParameter("precioProducto"));
 			product = new producto(actualProductId, request.getParameter("nombreProducto"), request.getParameter("descripcionProducto"), numeroBigDecimal, Integer.parseInt(request.getParameter("tipoProducto").toString()));
 			ResultQuerys = productService.saveProduct(product);
-			session = request.getSession(false);
+			session = request.getSession(false);	
 			if(ResultQuerys == 1) {
 				 session.setAttribute("success", "¡El producto se ha guardado correctamente!");
 			}else {
