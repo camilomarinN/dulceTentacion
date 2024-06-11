@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
-import config.onlineBD;
+
+import config.ConnectionBD;
 import models.usuario;
 
 public class usuarioRepository implements IRepository<usuario> {
@@ -20,7 +21,7 @@ public class usuarioRepository implements IRepository<usuario> {
 	public usuario SearchLogin(String email, String password) {
 		String SQL = "select * from usuarios where email_usuario='" + email + "' and contrasenia_usuario='" + password + "'";
 		user = new usuario();
-		onlineBD cn = new onlineBD();
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);
@@ -57,9 +58,9 @@ public class usuarioRepository implements IRepository<usuario> {
 		int result = 0;
 		String SQL = "INSERT INTO USUARIOS VALUES('"+usuario.getId_usuario()+"','"+usuario.getNombre_usuario()+"','"
 					  +usuario.getPrimer_apellido_usuario()+"','"+usuario.getSegundo_apellido_usuario()+"','"+usuario.getEmail_usuario()+"','"
-					  +usuario.getContrasenia()+"',1)"; //SE LE QUEMA EL ROL "USUARIO"
+					  +usuario.getContrasenia()+"',2)";
 		
-		onlineBD cn = new onlineBD();
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);
@@ -74,15 +75,15 @@ public class usuarioRepository implements IRepository<usuario> {
 	public Integer update(usuario usuario) {
 		int result = 0;
 		String SQL = "UPDATE USUARIOS SET nombre_usuario='"+usuario.getNombre_usuario()+"', primer_apellido_usuario='"+usuario.getPrimer_apellido_usuario()+"',"
-				+ "segundo_apellido_usuario="+usuario.getSegundo_apellido_usuario()+", email_usuario="+usuario.getEmail_usuario();
+				+ "segundo_apellido_usuario="+usuario.getSegundo_apellido_usuario()+", email_usuario="+usuario.getEmail_usuario() + "WHERE id_usuario = "+usuario.getId_usuario();
 		
-		onlineBD cn = new onlineBD();
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);
 			result = pst.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("Error consulta del UPDATE PRODUCTO: " + e);
+			System.out.println("Error consulta del UPDATE USUARIO: " + e);
 		}
 		return result;
 	}

@@ -5,11 +5,10 @@ import repository.productoRepository;
 
 public class productoService {
 
-	private productoRepository productRepo = new productoRepository();
+	private final productoRepository productRepo = new productoRepository();
 	
 	public int saveProduct(producto product) {
 		int result = 0;
-		productRepo = new productoRepository();
 		try {
 			if(product.getId_producto() == 0) {
 				result = productRepo.save(product);
@@ -24,7 +23,6 @@ public class productoService {
 	
 	public int deleteProduct(int idProducto) {
 		int result= 0;
-		productRepo = new productoRepository();
 		try {
 			if(idProducto == 0) {
 				return result;

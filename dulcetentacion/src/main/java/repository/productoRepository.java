@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import config.onlineBD;
+import config.ConnectionBD;
 import models.producto;
 
 public class productoRepository implements IRepository<producto>{
@@ -19,7 +19,7 @@ public class productoRepository implements IRepository<producto>{
 	public producto findById(int id) {
 		product = new producto();
 		String SQL = "select * from productos where id_producto="+id;
-		onlineBD cn = new onlineBD();
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);
@@ -42,7 +42,7 @@ public class productoRepository implements IRepository<producto>{
 	public List<producto> findAll() {
 		List<producto> Lista = new ArrayList<producto>();
 		String SQL = "select * from productos";
-		onlineBD cn = new onlineBD();
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);
@@ -68,7 +68,7 @@ public class productoRepository implements IRepository<producto>{
 		String SQL = "INSERT INTO PRODUCTOS(nombre_producto, descripcion_producto, precio_producto, tipo_producto) VALUES('"+product.getNombre_producto()+"','"+product.getDescripcion_producto()+"','"
 					  +product.getPrecio_producto()+"',"+product.getTipo_producto()+")";
 		
-		onlineBD cn = new onlineBD();
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);
@@ -85,7 +85,7 @@ public class productoRepository implements IRepository<producto>{
 		String SQL = "UPDATE PRODUCTOS SET nombre_producto='"+product.getNombre_producto()+"',descripcion_producto='"+product.getDescripcion_producto()+"',"
 				+ "precio_producto="+product.getPrecio_producto()+", tipo_producto="+product.getTipo_producto()+" where id_producto="+product.getId_producto();
 		
-		onlineBD cn = new onlineBD();
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);
@@ -101,7 +101,7 @@ public class productoRepository implements IRepository<producto>{
 		int result = 0;
 		String SQL = "DELETE FROM PRODUCTOS where id_producto="+id;
 		
-		onlineBD cn = new onlineBD();
+		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
 			pst = con.prepareStatement(SQL);
