@@ -22,6 +22,7 @@ public class Controlador extends HttpServlet {
     
 	// Redirecciones 
 	private String Index = "index.jsp";
+	private String Profile = "WEB-INF/ProfileUser.jsp";
 	private String Login = "WEB-INF/Login.jsp";
 	private String Register = "WEB-INF/Registro.jsp";
 	private String productList = "WEB-INF/ProductList.jsp";
@@ -53,6 +54,9 @@ public class Controlador extends HttpServlet {
 				break;
 			case "Register":
 				acceso = Register;
+				break;
+			case "myProfile":
+				acceso = Profile;
 				break;
 			case "ProductsList":
 				request.setAttribute("Productos", productRepo.findAll());

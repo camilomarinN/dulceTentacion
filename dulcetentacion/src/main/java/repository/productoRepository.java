@@ -65,8 +65,8 @@ public class productoRepository implements IRepository<producto>{
 	@Override
 	public Integer save(producto product) {
 		int result = 0;
-		String SQL = "INSERT INTO PRODUCTOS(nombre_producto, descripcion_producto, precio_producto, tipo_producto) VALUES('"+product.getNombre_producto()+"','"+product.getDescripcion_producto()+"','"
-					  +product.getPrecio_producto()+"',"+product.getTipo_producto()+")";
+		String SQL = "INSERT INTO PRODUCTOS VALUES(SQC_PRODUCTOS.NEXTVAL, '"+product.getNombre_producto()+"','"+product.getDescripcion_producto()+"','"
+					  +product.getPrecio_producto()+"',"+product.getTipo_producto()+",0,0,0,0,0)";
 		
 		ConnectionBD cn = new ConnectionBD();
 		try {

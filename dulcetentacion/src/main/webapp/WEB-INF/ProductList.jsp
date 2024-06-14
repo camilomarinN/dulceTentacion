@@ -71,7 +71,7 @@ usuario user = session != null && session.getAttribute("ActualUser") != null? (u
 					<% if(user.getRol_usuario() == 1){ %>
 					<td>
 						<a class="btn btn-primary" href="Controlador?accion=editProduct&productid=<%=product.getId_producto()%>">Editar</a>
-						<a class="btn btn-danger" href="Controlador?accion=deleteProduct&productid=<%=product.getId_producto()%>">Eliminar</a>
+						<a class="btn btn-danger" onclick="validarDeleteProducto(<%=product.getId_producto()%>);">Eliminar</a>
 					</td>
 					<%} %>
 				</tr>
