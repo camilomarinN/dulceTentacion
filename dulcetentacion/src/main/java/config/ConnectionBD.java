@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class ConnectionBD {
 
 	  //nombre por defecto
-    private String username = "us_pruebas"; 
+    private String username = "us_ppi"; 
     // dejarla vacia si no tiene contraseña
-    private String password = "123"; 
+    private String password = "Ppi5072024"; 
     //host de la bd
     private String host = "@localhost"; 
     //puerte de la bd 

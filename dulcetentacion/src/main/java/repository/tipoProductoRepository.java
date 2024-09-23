@@ -22,7 +22,7 @@ public class tipoProductoRepository implements IRepository<tipoProducto>{
 	}
 
 	@Override
-	public List<tipoProducto> findAll() {
+	public List<tipoProducto> findAll(String filter) {
 		List<tipoProducto> Lista = new ArrayList<tipoProducto>();
 		String SQL = "select * from tipos_productos";
 		ConnectionBD cn = new ConnectionBD();

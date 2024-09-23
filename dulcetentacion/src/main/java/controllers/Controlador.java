@@ -59,17 +59,19 @@ public class Controlador extends HttpServlet {
 				acceso = Profile;
 				break;
 			case "ProductsList":
-				request.setAttribute("Productos", productRepo.findAll());
+				String filter = request.getParameter("tipoProducto") != null ? request.getParameter("tipoProducto").toString() : null;
+				request.setAttribute("Productos", productRepo.findAll(filter));
+				request.setAttribute("tipoProductos", tipoProductRepo.findAll(null));
 				acceso = productList;
 				break;
 			case "createProduct":
-				request.setAttribute("tipoProductos", tipoProductRepo.findAll());
+				request.setAttribute("tipoProductos", tipoProductRepo.findAll(null));
 				acceso = createUpdateProduct;
 				break;
 			case "editProduct":
 				int productid = Integer.parseInt(request.getParameter("productid"));
 				request.setAttribute("product", productRepo.findById(productid));
-				request.setAttribute("tipoProductos", tipoProductRepo.findAll());
+				request.setAttribute("tipoProductos", tipoProductRepo.findAll(null));
 				acceso = createUpdateProduct;
 				break;
 			case "deleteProduct":

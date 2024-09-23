@@ -48,7 +48,7 @@ public class usuarioRepository implements IRepository<usuario> {
 	}
 
 	@Override
-	public List<usuario> findAll() {
+	public List<usuario> findAll(String filter) {
 		// TODO Auto-generated method stub
 		return null;
 	}

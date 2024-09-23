@@ -39,9 +39,13 @@ public class productoRepository implements IRepository<producto>{
 	}
 
 	@Override
-	public List<producto> findAll() {
+	public List<producto> findAll(String Filter) {
 		List<producto> Lista = new ArrayList<producto>();
-		String SQL = "select * from productos";
+		String SQL = "select * from productos where 1=1";
+		
+		if(Filter != null && !Filter.isEmpty()) {
+			SQL += " AND tipo_producto = "+Filter;
+		}
 		ConnectionBD cn = new ConnectionBD();
 		try {
 			con = cn.getConexio();
