@@ -43,7 +43,7 @@ public class productoRepository implements IRepository<producto>{
 		List<producto> Lista = new ArrayList<producto>();
 		String SQL = "select * from productos where 1=1";
 		
-		if(Filter != null && !Filter.isEmpty()) {
+		if(Filter != null && !Filter.isEmpty() && !Filter.toString().equals("0")) {
 			SQL += " AND tipo_producto = "+Filter;
 		}
 		ConnectionBD cn = new ConnectionBD();

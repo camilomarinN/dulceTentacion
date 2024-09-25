@@ -1,8 +1,11 @@
+var pasoActual = "1";
+
 function goPaso1(){
 	jQuery('#part2').removeClass("d-block");
 	jQuery('#part2').addClass("d-none");
 	jQuery('#part1').addClass("d-block");
 	jQuery('#part1').removeClass("d-none");
+	pasoActual = "1";
 }
 
 function goPaso2(){
@@ -26,10 +29,24 @@ function goPaso2(){
 		  title: "Oops...",
 		  text: mensaje
 		});
+		pasoActual = "1";
 	}else{
 		jQuery('#part1').removeClass("d-block");
 		jQuery('#part1').addClass("d-none");
 		jQuery('#part2').addClass("d-block");
 		jQuery('#part2').removeClass("d-none");
+		pasoActual = "2";
 	}
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+            var form = document.getElementById("registerForm");
+            form.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    if(pasoActual == "1"){
+						goPaso2();
+					}
+                }
+            });
+        });
