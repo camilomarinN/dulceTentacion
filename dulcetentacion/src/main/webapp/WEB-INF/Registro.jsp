@@ -8,12 +8,11 @@
 	rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-	<section class="vh-100" style="background-color: #F0DEDE;">
-	 <div class="container py-5 h-100">
+	<section class="vh-100">
 	   <div class="row d-flex justify-content-center align-items-center h-100">
 	     <div class="col-10">
 	       <div class="card" style="border-radius: 1rem;">
-	         <div class="row g-0 d-flex">
+	         <div class="row g-0 d-flex shadow-lg">
 	           <div class="col-xl-6 d-none d-xl-block" style="background-color: #F0DEDE;">
 	             <img src="img/logo.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
 	           </div>
@@ -66,7 +65,6 @@
         </div>
       </div>
     </div>
-  </div>
 </section>
 	<script src="${pageContext.request.contextPath}/js/Registro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

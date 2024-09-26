@@ -28,6 +28,7 @@ public class Controlador extends HttpServlet {
 	private String productList = "WEB-INF/ProductList.jsp";
 	private String createUpdateProduct = "WEB-INF/CreateUpdateProductModal.jsp";
 	private String resetPassword = "WEB-INF/resetPassword.jsp";
+	private String checkout = "WEB-INF/checkout.jsp";
 	
 	//Modelos y objetos
 	private int ResultQuerys;
@@ -57,6 +58,9 @@ public class Controlador extends HttpServlet {
 				break;
 			case "myProfile":
 				acceso = Profile;
+				break;
+			case "checkout":
+				acceso = checkout;
 				break;
 			case "ProductsList":
 				String filter = request.getParameter("tipoProducto") != null ? request.getParameter("tipoProducto").toString() : null;

@@ -6,6 +6,11 @@
     <meta charset="UTF-8">
     <title>Home Page - Dulce Tentación</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        *{
+        font-family: 'Montserrat', sans-serif;
+        }
+    </style>
 </head>
 <body>
 <% 
@@ -16,20 +21,26 @@ session.removeAttribute("Login");
 %>
 <header>
 	<nav class="navbar navbar-expand-md navbar-light fixed-top p-1 fw-bold" style="background-color: #F0DEDE !important;">
+		<div class="container-fluid">
 		<% if(user == null || user.getId_usuario() == null){%>
 		<a class="navbar-brand mx-2" href="Controlador?accion=Login">Iniciar sesión</a>
 		<% }else{ %>
 		<div>
 			<a class="navbar-brand mx-2" href="Controlador?accion=myProfile">Perfil</a>
 			<% if(user.getRol_usuario() == 1){%>
-			<a class="navbar-brand mx-2 d-none" href="Controlador?accion=UsersList">Administración de usuarios</a>
-			<a class="navbar-brand mx-2" href="Controlador?accion=ProductsList">Administración de productos</a>
+			<a class="navbar-brand mx-2" href="Controlador?accion=ProductsList">productos</a>
 			<% } %>
 		</div>
 		<div class="ms-auto">
 			<a class="navbar-brand mx-2" href="Controlador?accion=Logout">Cerrar sesión</a>
 		</div>
 		<%} %>
+		<a class="btn btn-outline-dark py-1 px-2" href="Controlador?accion=checkout">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+		  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+		</svg>
+		</a>
+		</div>
     </nav>
   </header>
     <main class="container pt-5 mt-4">
@@ -87,7 +98,7 @@ session.removeAttribute("Login");
         </div>
     </main>
     <!-- FOOTER -->
-   	<footer class="py-3 my-4 bg-light fw-bold" style="background-color: #F0DEDE !important;">
+   	<footer class="py-3 bg-light fw-bold" style="background-color: #F0DEDE !important;">
 	   	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
 	     	<li class="nav-item"><a href="#" class="nav-link px-2 text-dark">Preguntas frecuentes</a></li>
 	     	<li class="nav-item"><a href="#" class="nav-link px-2 text-dark">Sobre nuestros productos</a></li>
